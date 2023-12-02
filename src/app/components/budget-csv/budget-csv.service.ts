@@ -4,7 +4,7 @@ import {DropdownOption} from '@ironsource/fusion-ui/components/dropdown-option';
 import {Observable, of} from 'rxjs';
 import {Campaign, DownloadBudgetCsvFormData, DownloadBudgetQueryParamsDTO, MOCK_CAMPAIGNS} from './budget-csv.entities';
 import {DEFUALT_REQUEST_BODY_FIELDS} from './budget-csv.config';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +13,10 @@ export class BudgetCsvService {
     constructor() {}
 
     getCsvBudgetCampaigns(): Observable<Campaign[]> {
-        return of(MOCK_CAMPAIGNS).pipe(map((data: any) => (Array.isArray(data.campaigns) ? data.campaigns : [])));
+        return of(MOCK_CAMPAIGNS).pipe(
+            tap(console.log),
+            map((data: any) => (Array.isArray(data.campaigns) ? data.campaigns : []))
+        );
     }
 
     downloadBudgetCsvStreamData(data: DownloadBudgetCsvFormData): Observable<any> {
@@ -95,7 +98,6 @@ export class BudgetCsvService {
     }
 
     private getSelectedIds(options: DropdownOption[], prop = 'id'): any[] | undefined {
-        // @ts-ignore
-        return options?.map(option => åoption[prop]);
+        return options?.map(option => option[prop]);
     }
 }

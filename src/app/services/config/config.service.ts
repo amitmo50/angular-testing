@@ -2071,10 +2071,10 @@ export class ConfigService {
      * @param value
      */
     public getKey(config: string, value: number | string) {
-        // @ts-ignore
-        const keyArr = Object.keys(this[config]).filter(
-            // @ts-ignore
-            configKey => (isObject(this[config][configKey]) && this[config][configKey].ID === value) || this[config][configKey] === value
+        const keyArr = Object.keys(this.config[config]).filter(
+            configKey =>
+                (isObject(this.config[config][configKey]) && this.config[config][configKey].ID === value) ||
+                this.config[config][configKey] === value
         );
         if (keyArr && keyArr[0]) {
             return keyArr[0];
@@ -2085,7 +2085,6 @@ export class ConfigService {
     }
 
     public getDropdownOptions(config: string): DropdownOption[] {
-        // @ts-ignore
         const configOptions = Object.values(this.config[config]) as any[];
         const sortedConfigByDisplayText = configOptions.sort((obj1, obj2) => (obj1['DISPLAY_TEXT'] > obj2['DISPLAY_TEXT'] ? 1 : -1));
         const DROPDOWN_KEY_TRANSFORM_OPTIONS = {
