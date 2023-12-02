@@ -10,7 +10,6 @@ export interface DownloadBudgetCsvFormData {
     titles?: DropdownOption[];
     countries?: DropdownOption[];
 }
-
 export interface DownloadBudgetQueryParamsDTO {
     order: string;
     direction: string;
@@ -24,11 +23,6 @@ export interface DownloadBudgetQueryParamsDTO {
     titleIds?: number[];
     country?: number[];
 }
-
-export enum BudgetCsvEvent {
-    DOWNLOAD = 'DOWNLOAD_CSV_BUDGET'
-}
-
 export enum StreamFileStatus {
     START,
     ERROR,
@@ -113,7 +107,6 @@ export interface Campaign {
         actionValue?: number;
     };
 }
-
 export const MOCK_CAMPAIGNS = {
     campaigns: [
         {

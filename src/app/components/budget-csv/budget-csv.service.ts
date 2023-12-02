@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {DropdownOption} from '@ironsource/fusion-ui/components/dropdown-option';
-import {Observable, of} from 'rxjs';
-import {Campaign, DownloadBudgetCsvFormData, DownloadBudgetQueryParamsDTO, MOCK_CAMPAIGNS} from './budget-csv.entities';
+import {delay, Observable, of} from 'rxjs';
+import {Campaign, DownloadBudgetCsvFormData, DownloadBudgetQueryParamsDTO, MOCK_CAMPAIGNS, StreamFileStatus} from './budget-csv.entities';
 import {DEFUALT_REQUEST_BODY_FIELDS} from './budget-csv.config';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +14,7 @@ export class BudgetCsvService {
 
     getCsvBudgetCampaigns(): Observable<Campaign[]> {
         return of(MOCK_CAMPAIGNS).pipe(
-            tap(console.log),
+            delay(3000),
             map((data: any) => (Array.isArray(data.campaigns) ? data.campaigns : []))
         );
     }
@@ -22,8 +22,7 @@ export class BudgetCsvService {
     downloadBudgetCsvStreamData(data: DownloadBudgetCsvFormData): Observable<any> {
         const preparedData = this.prepareDataForBudgetCsvDownload(data);
         const fileName = this.generateCsvFileName(data);
-        // return this.streamFileDownloadService.downloadCsvData(url, fileName, preparedData);
-        return of([]);
+        return of(StreamFileStatus.START).pipe(delay(5000));
     }
 
     formatDate(date: Date): string {

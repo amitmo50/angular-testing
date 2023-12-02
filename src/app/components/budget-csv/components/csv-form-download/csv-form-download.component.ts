@@ -100,8 +100,6 @@ export class CsvFormDownloadComponent implements OnInit, OnDestroy {
     private parseCampaignsData(campaigns: Campaign[]) {
         return campaigns.map(campaign => {
             const {id, name, titleIcon, platform} = campaign;
-            console.log('parseCampaignsData: ', {id, name, titleIcon, platform});
-
             return {
                 id: `csv_budget_${id}`,
                 campaignId: id,

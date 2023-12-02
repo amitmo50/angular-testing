@@ -26,13 +26,6 @@ class ConfigServiceMock {
 }
 
 @Injectable()
-class MockCountriesService {
-    public get countries(): any {
-        return {toDropDownList: []};
-    }
-}
-
-@Injectable()
 class BudgetCsvServiceMock {
     sendOptimizerCsvEvent() {}
     getCsvOptimizerCampaigns(): any {

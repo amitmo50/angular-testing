@@ -62,12 +62,13 @@ export class BudgetCsvComponent implements OnInit, OnDestroy {
     private onDownloadCsvFileStart(status: StreamFileStatus) {
         if (status === StreamFileStatus.START) {
             this.loading$.next(false);
+            console.log('Success download CSV!');
         }
     }
 
     private onErrorCsvDownload(error: Error) {
-        console.log('Error: ', error);
         this.loading$.next(false);
+        console.error('Download CSV error: ', error);
     }
 
     private initConfigurations() {
