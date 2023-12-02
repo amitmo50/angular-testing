@@ -1,0 +1,54 @@
+@import "../../../../node_modules/@ironsource/fusion-ui/style/v3/vars/fonts";
+@import "../../../../node_modules/@ironsource/fusion-ui/style/v3/grid";
+:host {
+    --section-container-header-padding:26px 24px 26px 24px;
+    --section-container-content-padding: 40px;
+
+    .budget-csv-container {
+        .actions-container {
+            background: white;
+            padding: 15px 24px;
+            display: flex;
+            flex-direction: column;
+            border:1px solid #DDDFE1;
+            border-radius: 16px;
+            height: 100%;
+            margin-top: 24px;
+
+            .action-buttons-container {
+                display: flex;
+                margin-left: auto;
+
+                .primary {
+                    margin-left: 4px;
+                }
+            }
+        }
+
+        .budget-csv-section-container {
+            background: white;
+            display: flex;
+            flex-direction: column;
+            border:1px solid #DDDFE1;
+            border-radius: 16px;
+            height: 100%;
+
+            .header-container{
+                padding: var(--section-container-header-padding);
+                border-bottom:1px solid #DDDFE1;
+                font-size: 14px;
+                .title {
+                    margin-right: 8px;
+                }
+            }
+
+            .content-container{
+                flex: 1 1;
+                padding: var(--section-container-content-padding);
+                position: relative;
+            }
+        }
+    }
+}
+
+

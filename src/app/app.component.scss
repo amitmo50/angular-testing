@@ -1,0 +1,20 @@
+@import "../../node_modules/@ironsource/fusion-ui/style/v3/vars/fonts";
+@import "../../node_modules/@ironsource/fusion-ui/style/v3/grid";
+
+:host {
+  .content{
+    display: block;
+    background-color: rgb(243, 245, 247);
+    height: 100vh;
+  }
+
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .page-container {
+    padding: 40px 180px;
+  }
+}

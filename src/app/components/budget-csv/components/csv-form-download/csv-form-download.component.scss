@@ -1,0 +1,49 @@
+
+@import "../../../../../../node_modules/@ironsource/fusion-ui/style/v3/vars/vars";
+@import "../../../../../../node_modules/@ironsource/fusion-ui/style/v3/vars/colors";
+@import "../../../../../../node_modules/@ironsource/fusion-ui/style/v3/vars/border";
+@import "../../../../../../node_modules/@ironsource/fusion-ui/style/v3/mixins/mixins";
+@import "../../../../../../node_modules/@ironsource/fusion-ui/style/v3/vars/fonts";
+@import "../../../../../../node_modules/@ironsource/fusion-ui/style/v3/grid";
+
+%center {
+	display: flex;
+	align-items: center;
+}
+
+:host {
+    .budget-csv-form-download-container {
+
+        fusion-checkbox {
+            padding-right: 16px;
+        }
+
+        .row-container {
+            margin-top: 16px;
+            min-height: 40px;
+
+            &.status-container {
+                padding: 11.5px 0;
+            }
+
+            ::ng-deep fusion-dropdown-dual-multi-select {
+
+                .dropdown-dual-multi-select-button {
+                    max-width: 545px!important;
+                }
+            }
+
+            .input-label {
+                @extend %center;
+            }
+        }
+
+        .daterange-container {
+            @extend %center;
+            ::ng-deep fusion-daterange {
+                max-width: 251px;
+            }
+        }
+
+    }
+}

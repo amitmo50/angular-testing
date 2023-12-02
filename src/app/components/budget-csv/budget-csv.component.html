@@ -1,0 +1,33 @@
+<div class="budget-csv-container">
+    <div class="budget-csv-section-container">
+        <form [formGroup]="form">
+            <div class="header-container">
+                <div class="title-section">
+                    <label class="title">Download CSV</label>
+                </div>
+            </div>
+            <div class="content-container">
+                <is-csv-form-download
+                    [startDate]="startDate"
+                    [endDate]="endDate">
+                </is-csv-form-download>
+            </div>
+        </form>
+    </div>
+
+    <div class="actions-container">
+        <div class="action-buttons-container">
+            <fusion-button
+                class="transparent third medium"
+                (click)="onCancel()">
+                Cancel
+            </fusion-button>
+            <fusion-button
+                [loading]="(loading$ | async)!"
+                (click)="onSubmit()"
+                class="primary medium loading">
+                Download
+            </fusion-button>
+        </div>
+    </div>
+</div>

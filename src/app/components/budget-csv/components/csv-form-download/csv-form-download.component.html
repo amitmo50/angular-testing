@@ -1,0 +1,71 @@
+<div class="budget-csv-form-download-container" [formGroup]="formGroup">
+    <div class="row">
+        <div class="col-3 input-label">
+            <label>Date range</label>
+        </div>
+        <div class="col-9 daterange-container">
+            <fusion-daterange
+                    formControlName="timeFrame"
+                    [options]="dateRangeOptions">
+            </fusion-daterange>
+        </div>
+    </div>
+
+    <div class="row row-container status-container">
+        <div class="col-3 input-label">
+            <label>Campaign status</label>
+        </div>
+        <div class="col-9">
+            <fusion-checkbox formControlName="active" label="Active"></fusion-checkbox>
+            <fusion-checkbox formControlName="inactive" label="Inactive"></fusion-checkbox>
+            <fusion-checkbox formControlName="archived" label="Archived"></fusion-checkbox>
+        </div>
+    </div>
+
+    <div class="row row-container">
+        <div class="col-3 input-label">
+            <label>Platforms</label>
+        </div>
+        <div class="col-9">
+            <fusion-dropdown-dual-multi-select
+                formControlName="platforms"
+                placeholder="Add platform"
+                title="Platform"
+                [items]="(platforms$ | async)!"
+                [pendingItems]="false">
+            </fusion-dropdown-dual-multi-select>
+        </div>
+    </div>
+
+    <div class="row row-container">
+        <div class="col-3 input-label">
+            <label>Titles</label>
+        </div>
+        <div class="col-9">
+            <fusion-dropdown-dual-multi-select
+                    formControlName="titles"
+                    placeholder="Add title"
+                    title="Title"
+                    [items]="(titles$ | async)!"
+                    [searchByProperties]="searchByProperties"
+                    [pendingItems]="(titlesLoading$ | async)!">
+            </fusion-dropdown-dual-multi-select>
+        </div>
+    </div>
+
+    <div class="row row-container">
+        <div class="col-3 input-label">
+            <label>Campaigns</label>
+        </div>
+        <div class="col-9">
+            <fusion-dropdown-dual-multi-select
+                    formControlName="campaigns"
+                    placeholder="Add campaign"
+                    title="Campaign"
+                    [items]="(campaigns$ | async)!"
+                    [searchByProperties]="searchByProperties"
+                    [pendingItems]="(campaignsLoading$ | async)!">
+            </fusion-dropdown-dual-multi-select>
+        </div>
+    </div>
+</div>
