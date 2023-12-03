@@ -20,8 +20,8 @@ export class BudgetCsvService {
     }
 
     downloadBudgetCsvStreamData(data: DownloadBudgetCsvFormData): Observable<any> {
-        const preparedData = this.prepareDataForBudgetCsvDownload(data);
-        const fileName = this.generateCsvFileName(data);
+        // const preparedData = this.prepareDataForBudgetCsvDownload(data);
+        // const fileName = this.generateCsvFileName(data);
         return of(StreamFileStatus.START).pipe(delay(5000));
     }
 
