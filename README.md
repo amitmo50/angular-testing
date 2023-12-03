@@ -1,6 +1,7 @@
 # AngularTesting
 
 This project is about practice writing unit/integration test using Angular.
+Please Run `npm ci` for install the dependencies, then serve the application.
 
 ## Development server
 
