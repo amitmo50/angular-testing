@@ -62,6 +62,7 @@
                     formControlName="campaigns"
                     placeholder="Add campaign"
                     title="Campaign"
+                    [isDisabled]="isDisabled"
                     [items]="(campaigns$ | async)!"
                     [searchByProperties]="searchByProperties"
                     [pendingItems]="(campaignsLoading$ | async)!">

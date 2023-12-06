@@ -3,7 +3,7 @@ import {FormGroup, FormGroupDirective, ReactiveFormsModule} from '@angular/forms
 import {DaterangeOptions} from '@ironsource/fusion-ui/components/daterange/entities';
 import {CalendarService} from '@ironsource/fusion-ui/components/calendar';
 import {DropdownOption} from '@ironsource/fusion-ui/components/dropdown-option';
-import {BehaviorSubject, defer, Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, combineLatest, defer, merge, Observable, of, Subject} from 'rxjs';
 import {DATERANGE_OPTIONS, MIN_DATE, SEARCH_BY_PROPERTIES, CampaignDropdownOption} from './csv-form-download.config';
 import {catchError, map, startWith, takeUntil, tap} from 'rxjs/operators';
 import {CommonModule} from '@angular/common';
@@ -39,6 +39,7 @@ export class CsvFormDownloadComponent implements OnInit, OnDestroy {
     dateLimitations!: {minStartDate: Date; minEndDate: Date};
     dateRangeOptions!: DaterangeOptions;
     formGroup!: FormGroup;
+    isDisabled: boolean = true;
 
     private onDestroy$ = new Subject<void>();
 
@@ -54,6 +55,7 @@ export class CsvFormDownloadComponent implements OnInit, OnDestroy {
         this.initConfigurations();
         this.initForm();
         this.initObservables();
+        this.initListeners();
     }
 
     ngOnDestroy(): void {
@@ -66,6 +68,14 @@ export class CsvFormDownloadComponent implements OnInit, OnDestroy {
         this.formGroup?.get('timeFrame').setValue({startDate: this.startDate, endDate: this.endDate});
     }
 
+    private initListeners() {
+        const active$ = this.formGroup.get('active').valueChanges.pipe(startWith(this.formGroup.get('active').value));
+        const inactive$ = this.formGroup.get('inactive').valueChanges.pipe(startWith(this.formGroup.get('inactive').value));
+        const archived$ = this.formGroup.get('archived').valueChanges.pipe(startWith(this.formGroup.get('archived').value));
+        combineLatest(active$, inactive$, archived$)
+            .pipe(takeUntil(this.onDestroy$))
+            .subscribe(([active, inactive, archived]) => (this.isDisabled = !(active || inactive || archived)));
+    }
     private initObservables() {
         this.campaigns$ = this.getCampaignListObservable();
         this.titles$ = this.getTitleListObservable();

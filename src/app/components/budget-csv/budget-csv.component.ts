@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, inject, OnDestroy, OnInit, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -30,7 +30,6 @@ export class BudgetCsvComponent implements OnInit, OnDestroy {
     private budgetCsvService = inject(BudgetCsvService);
     private onDestroy$ = new Subject<void>();
 
-    @Output() onCancelClicked = new EventEmitter<void>();
     ngOnInit(): void {
         this.initConfigurations();
         this.form = this.generateFromGroup();
@@ -47,7 +46,7 @@ export class BudgetCsvComponent implements OnInit, OnDestroy {
     }
 
     onCancel() {
-        this.onCancelClicked.emit();
+        console.log('Cancel and Redirect');
     }
 
     private onDownloadButtonClicked() {
