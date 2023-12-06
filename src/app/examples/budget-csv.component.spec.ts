@@ -28,7 +28,7 @@ describe('BudgetCsvComponentExample', () => {
                         snapshot: {queryParams: of({})}
                     }
                 },
-                {provide: BudgetCsvService, useClass: BudgetCsvServiceMock},
+                BudgetCsvService,
                 {provide: ApplicationService, useClass: ApplicationServiceMock},
                 {provide: ConfigService, useClass: MockConfigService}
             ]
