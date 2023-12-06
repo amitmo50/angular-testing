@@ -59,7 +59,7 @@ export class BudgetCsvComponent implements OnInit, OnDestroy {
             .subscribe(this.onDownloadCsvFileStart.bind(this), this.onErrorCsvDownload.bind(this));
     }
 
-    private onDownloadCsvFileStart(status: StreamFileStatus) {
+    private onDownloadCsvFileStart({status}: {status: StreamFileStatus}) {
         if (status === StreamFileStatus.START) {
             this.loading$.next(false);
             console.log('Success download CSV!');

@@ -20,9 +20,9 @@ export class BudgetCsvService {
     }
 
     downloadBudgetCsvStreamData(data: DownloadBudgetCsvFormData): Observable<any> {
-        // const preparedData = this.prepareDataForBudgetCsvDownload(data);
-        // const fileName = this.generateCsvFileName(data);
-        return of(StreamFileStatus.START).pipe(delay(5000));
+        const preparedData = this.prepareDataForBudgetCsvDownload(data);
+        const fileName = this.generateCsvFileName(data);
+        return of({status: StreamFileStatus.START}).pipe(delay(5000));
     }
 
     formatDate(date: Date): string {
@@ -30,7 +30,7 @@ export class BudgetCsvService {
         return <string>datePipe.transform(date, 'yyyy-MM-dd');
     }
 
-    getDatesPreset() {
+    getDatesPreset(): {label: string; endDate: Date; startDate: Date}[] {
         const d = new Date();
         const now = new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
         return [
@@ -67,7 +67,7 @@ export class BudgetCsvService {
         ];
     }
 
-    private generateCsvFileName({timeFrame}: DownloadBudgetCsvFormData) {
+    private generateCsvFileName({timeFrame}: DownloadBudgetCsvFormData): string {
         const {startDate, endDate} = timeFrame;
         const from = this.formatDate(startDate);
         const to = this.formatDate(endDate);
@@ -77,9 +77,8 @@ export class BudgetCsvService {
     private prepareDataForBudgetCsvDownload(data: DownloadBudgetCsvFormData): DownloadBudgetQueryParamsDTO {
         const startDate = this.formatDate(data.timeFrame.startDate);
         const endDate = this.formatDate(data.timeFrame.endDate);
-        const campaigns = this.getSelectedIds(data.campaigns as DropdownOption[], 'campaignId');
+        const campaigns = this.getSelectedIds(data.campaigns as DropdownOption[]);
         const titleIds = this.getSelectedIds(data.titles as DropdownOption[]);
-        const countries = this.getSelectedIds(data.countries as DropdownOption[]);
         const platforms = this.getSelectedIds(data.platforms as DropdownOption[]);
         const active = data.active ? (data.inactive ? null : true) : data.inactive ? false : null;
         const archived = data.archived ? (!data.active || !data.inactive ? true : null) : data.archived;
@@ -91,12 +90,11 @@ export class BudgetCsvService {
             ...(campaigns?.length ? {campaignIds: campaigns} : null),
             ...(platforms?.length === 1 ? {platforms: platforms.toString()} : null),
             ...(titleIds?.length ? {titleIds} : null),
-            ...(countries?.length ? {country: countries} : null),
             ...(active != null ? {active} : null)
         };
     }
 
-    private getSelectedIds(options: DropdownOption[], prop = 'id'): any[] | undefined {
+    private getSelectedIds(options: DropdownOption[], prop = 'id'): any[] {
         return options?.map(option => option[prop]);
     }
 }

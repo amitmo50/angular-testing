@@ -21,7 +21,6 @@ export interface DownloadBudgetQueryParamsDTO {
     campaigns?: number[];
     platforms?: string;
     titleIds?: number[];
-    country?: number[];
 }
 export enum StreamFileStatus {
     START,
